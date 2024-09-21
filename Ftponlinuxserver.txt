@@ -1,0 +1,48 @@
+sudo apt update
+sudo apt install vsftpd
+sudo systemctl status vsftpd
+sudo systemctl start vsftpd
+sudo adduser ftpuser
+sudo mkdir -p /var/ftp/inward
+sudo mkdir -p /var/ftp/outward
+sudo chown ftpuser:ftpuser /var/ftp/inward
+sudo chown ftpuser:ftpuser /var/ftp/outward
+sudo chmod 755 /var/ftp/inward
+sudo chmod 755 /var/ftp/outward
+sudo nano /etc/vsftpd.conf
+local_enable=YES
+write_enable=YES
+chroot_local_user=YES
+chroot_list_enable=YES
+chroot_list_file=/etc/vsftpd.chroot_list
+sudo nano /etc/vsftpd.chroot_list
+
+
+for restric
+sudo usermod -d /var/ftp/inward ftpuser
+sudo systemctl restart vsftpd
+
+
+sudo ufw allow 20/tcp
+sudo ufw allow 21/tcp
+sudo ufw allow 40000:50000/tcp
+
+
+
+sudo touch /etc/vsftpd.chroot_list
+sudo chmod 644 /etc/vsftpd.chroot_list
+sudo chown root:root /etc/vsftpd.chroot_list
+
+sudo nano /etc/vsftpd.chroot_list
+ftpuser1
+ftpuser2
+
+
+For each user, add one username per line. If you don't want to exempt any users, you can leave the file empty.
+
+sudo systemctl restart vsftpd
+sudo systemctl status vsftpd
+
+
+
+
