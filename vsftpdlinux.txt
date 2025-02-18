@@ -1,0 +1,44 @@
+installation ftp server on the linux
+
+sudo apt update
+sudo apt install vsftpd -y
+
+sudo systemctl start vsftpd
+sudo systemctl enable vsftpd
+sudo systemctl status vsftpd
+
+
+
+
+to check the status of the ftpserver
+
+sudo systemctl status vsftpd
+
+to check who is owner and the path
+
+cat /etc/passwd | grep ftp
+
+remove the write permission from the folder to access the ftp server
+
+sudo adduser Ftpuser
+
+sudo mkdir -p /home/Ftpuser
+
+ownership give to the Ftpuser
+sudo chrown -R Ftpuser:Ftpuser /home/Ftpuser
+sudo chmod  -R 750 /home/Ftpuser
+sudo chmod -R 750 /home/Ftpuser/outword
+sudo chmod -R 750 /home/Ftpuser/inword
+
+sudo chmod a-w /home/Ftpuser
+
+
+
+Error
+sudo nano /etc/vsftpd.conf
+chroot_local_user=YES
+replace
+chroot_local_user=NO
+allow_writeable_chroot=YES
+sudo systemctl restart vsftpd
+
